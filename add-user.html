@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add User</h1>
+        </header>
+        <form id="addUserForm">
+            <label for="id">ID:</label>
+            <input type="number" id="id" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" required>
+            <button type="submit">Add User</button>
+        </form>
+        <footer>
+            <button onclick="window.location.href='view-user.html'">Back to View Users</button>
+        </footer>
+    </div>
+    <script src="add-user.js"></script>
+</body>
+</html>
