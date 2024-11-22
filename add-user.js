@@ -1,29 +1,34 @@
-// add-user.js
-const form = document.getElementById('addUserForm');
+document.getElementById('add-form').onsubmit = async (e) => {
+    e.preventDefault(); // Prevent form from refreshing the page
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    // Get form values
+    const name = document.getElementById('name').value;
+    const gender = document.getElementById('gender').value;
 
-  const id = document.getElementById('id').value;
-  const name = document.getElementById('name').value;
-  const gender = document.getElementById('gender').value;
+    // Prepare the user object
+    const newUser = {
+        name,
+        gender
+    };
 
-  try {
-    const response = await fetch('http://localhost:8080/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, name, gender }),
-    });
-    const newUser = await response.json();
+    try {
+        // Send POST request to add user
+        const response = await fetch('http://localhost:8080/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        });
 
-    if (response.ok) {
-      alert('User added successfully');
-      window.location.href = 'view-user.html'; // Redirect to view users page
-    } else {
-      alert('Error adding user');
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const addedUser = await response.json();
+        alert(`User added successfully! ID: ${addedUser.id}`);
+    } catch (err) {
+        console.error('Error adding user:', err);
+        alert('Error adding user: ' + err.message);
     }
-  } catch (err) {
-    console.error('Error adding user:', err);
-    alert('Error adding user');
-  }
-});
+};
