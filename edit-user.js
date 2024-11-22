@@ -8,7 +8,7 @@ window.onload = async () => {
 
   try {
       // Fetch the user data using the ID from the query string
-      const response = await fetch(`http://localhost:8080/users/${userId}`);
+      const response = await fetch(`https://ai-ds-backend-6tnt.onrender.com/users/${userId}`);
 
       if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -37,7 +37,7 @@ document.getElementById('edit-form').onsubmit = async (e) => {
   const updatedUser = { id: userId, name, gender };
 
   try {
-      const response = await fetch(`http://localhost:8080/users/${userId}`, {
+      const response = await fetch(`https://ai-ds-backend-6tnt.onrender.com/users/${userId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updatedUser)
